@@ -226,11 +226,27 @@ public class ImageKeyboard extends InputMethodService {
             }
         });
 
+        Button textButton = new Button(this);
+        textButton.setText("Say Hello");
+        textButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputConnection connection = getCurrentInputConnection();
+
+                if (connection == null) {
+                    return;
+                }
+                Log.v(TAG, "text before cursor: " + connection.getTextBeforeCursor(100, 0));
+                connection.commitText("Hello", 1);
+            }
+        });
+
         final LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.addView(mGifButton);
         layout.addView(mPngButton);
         layout.addView(mWebpButton);
+        layout.addView(textButton);
         return layout;
     }
 

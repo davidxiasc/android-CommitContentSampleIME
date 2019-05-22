@@ -236,7 +236,9 @@ public class ImageKeyboard extends InputMethodService {
                 if (connection == null) {
                     return;
                 }
+                long startTime = System.currentTimeMillis();
                 Log.v(TAG, "text before cursor: " + connection.getTextBeforeCursor(100, 0));
+                Log.v(TAG, String.format("Get text operation took %d ms", System.currentTimeMillis() - startTime));
                 connection.commitText("Hello", 1);
             }
         });
